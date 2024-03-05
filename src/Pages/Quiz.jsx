@@ -37,7 +37,7 @@ const Quiz = () => {
                 }
                 <div className="col-100">
                     {
-                        questions.length == answers.length && 
+                        questions.length === answers.length && 
                         <button className="btn btn-secondary btn-lg" onClick={gotoResultPage}>Submit</button>
                     }
                 </div>

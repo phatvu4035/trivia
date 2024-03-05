@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +13,22 @@ const Result = () => {
 
     const answers = useSelector(state => {
         return state.answers.answers;
+    });
+
+    const countCorrectAnswer = () => {
+        let count = 0;
+        questions.forEach((ques) => {
+            answers.forEach((item) => {
+                if (item.question === ques.question && item.selectedAns === ques.correct_answer) {
+                    count++;
+                }
+            });
+        });
+        return count;
+    }
+
+    const [correctCount] = useState(() => {
+        return countCorrectAnswer();
     });
 
     const gotoQuizPage = () => {
@@ -31,6 +48,7 @@ const Result = () => {
                         );
                     })
                 }
+                <div className='text-center wd300 mglr-auto'><p className='bg-red'>You scored {correctCount} of {questions.length}</p></div>
                 <div className="col-100">
                     <button className="btn btn-secondary btn-lg" onClick={gotoQuizPage}>Create a new quiz</button>
                 </div>

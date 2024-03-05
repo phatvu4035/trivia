@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch} from 'react-redux';
 import { setQuestions } from "../redux/questionSlice";
 
@@ -36,22 +36,22 @@ const Filter = () => {
             <div className="row">
                 <div className="form-group col-45">
                     <select className="form-control" name="categorySelect" onChange={handleCategoryChange} defaultValue={category}>
-                        <option selected value>Select a category</option>
+                        <option value={''}>Select a category</option>
                         {categories.map((cat) => {
                             return (
-                                <>
-                                    <option key={cat.id} value={cat.id}>{cat.name}</option>
-                                </>
+                                <React.Fragment key={cat.id}>
+                                    <option value={cat.id}>{cat.name}</option>
+                                </ React.Fragment>
                             )
                         })}
                     </select>
                 </div>
                 <div className="form-group col-45">
                     <select className="form-control" name="difficultySelect" onChange={handleDifficultyChange} defaultValue={difficulty}>
-                        <option value={''}>Select a difficulty</option>
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
+                        <option key={'1'} value={''}>Select a difficulty</option>
+                        <option key={'2'} value="easy">Easy</option>
+                        <option key={'3'} value="medium">Medium</option>
+                        <option key={'4'} value="hard">Hard</option>
                     </select>
                 </div>
                 <div className="col-10">

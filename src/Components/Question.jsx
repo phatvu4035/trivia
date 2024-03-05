@@ -25,7 +25,7 @@ const Question = ({question, displayResult, questionInd}) => {
             question: questionTitle
         }
         // if selected answer option, remove it
-        if (!selectedAns.includes(ans)) {
+        if (ans !== selectedAns) {
             dispatch(setSelectedAnswer(payload));
         } else {
             dispatch(removeSelectedAnswer(payload));
@@ -37,18 +37,19 @@ const Question = ({question, displayResult, questionInd}) => {
             if (item.question === question.question) {
                 return true
             }
+            return false;
         });
         return questionSelectedAns && questionSelectedAns.selectedAns;
-    }) || [];
+    }) || null;
 
     const getAnsClassName = (ans) => {
         let classname = 'btn btn-outline-success font13 mgr-10';
-        if ( (displayResult && question.correct_answer.includes(ans) && selectedAns.includes(ans) )
+        if ( (displayResult && question.correct_answer === ans )
             ||
-            (!displayResult && selectedAns.includes(ans))
+            (!displayResult && ans === selectedAns )
         ) {
             classname += ' bg-green';
-        } else if (displayResult && !question.correct_answer.includes(ans) && selectedAns.includes(ans)) {
+        } else if (displayResult && ans !== question.correct_answer && ans === selectedAns) {
             classname += ' bg-red';
         }
         return classname;

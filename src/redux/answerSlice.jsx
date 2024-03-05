@@ -9,42 +9,31 @@ export const answerSlice = createSlice({
         setSelectedAnswer: (state, action) => {
             let question = action.payload.question;
             let ans = action.payload.ans;
-            let type = action.payload.type;
 
             let answer = {};
-            let notSelecteddAns = state.answers.filter((item) => {
+            state.answers = state.answers.map((item) => {
                 if (item.question === question) {
-                    answer = {...item}
-                    return false;
+                    answer = item;
+                    item.selectedAns = ans;
+                    return item;
                 }
-                return true;
+                return item;
             });
+            //
             if (Object.keys(answer).length === 0) {
-                answer = {question: question, selectedAns: []};
+                answer.question = question;
+                answer.selectedAns = ans;
+                state.answers.push(answer);
             }
-            if (type === 'multiple') {
-                answer.selectedAns.push(ans);
-            } else {
-                answer.selectedAns = [ans];
-            }
-            notSelecteddAns.push(answer)
-            state.answers = notSelecteddAns;
         },
         removeSelectedAnswer: (state, action) => {
             let question = action.payload.question;
-            let ans = action.payload.ans;
-            let type = action.payload.type;
 
-            state.answers = state.answers.map((item) => {
+            state.answers = state.answers.filter((item) => {
                 if (item.question === question) {
-                    item.selectedAns = item.selectedAns.filter((s) => {
-                        if (s != ans) {
-                            return true;
-                        }
-                        return false;
-                    });
+                    return false;
                 }
-                return item;
+                return true;
             });
         }
     },
