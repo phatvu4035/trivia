@@ -12,7 +12,7 @@ import Result from './Pages/Result';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/trivia',
     element: <Quiz />
   },
   {
