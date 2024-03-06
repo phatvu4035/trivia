@@ -32,7 +32,7 @@ const Result = () => {
     });
 
     const gotoQuizPage = () => {
-        navigate('/');
+        navigate('/trivia');
     }
 
     return (
