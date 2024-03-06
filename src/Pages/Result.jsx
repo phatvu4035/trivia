@@ -48,7 +48,11 @@ const Result = () => {
                         );
                     })
                 }
-                <div className='text-center wd300 mglr-auto'><p className='bg-red'>You scored {correctCount} of {questions.length}</p></div>
+                {
+                    (answers.length > 0) &&
+                    <div className='text-center wd300 mglr-auto'><p className='bg-red'>You scored {correctCount} of {questions.length}</p></div>
+                }
+                
                 <div className="col-100">
                     <button className="btn btn-secondary btn-lg" onClick={gotoQuizPage}>Create a new quiz</button>
                 </div>

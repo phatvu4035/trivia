@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {setSelectedAnswer, removeSelectedAnswer} from "../redux/answerSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const Question = ({question, displayResult, questionInd}) => {
+const Question = ({question, displayResult}) => {
 
     const dispatch = useDispatch();
 
