@@ -1,10 +1,20 @@
-import {useSelector} from 'react-redux';
+import { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import Filter from "../Components/Filter";
 import Question from "../Components/Question";
+import { setQuestions } from "../redux/questionSlice";
+import { clearAllAnswer } from '../redux/answerSlice';
 
 const Quiz = () => {
+    const dispatch = useDispatch();
+    // reset question and answer
+    useEffect(() => {
+        dispatch(setQuestions([]));
+        dispatch(clearAllAnswer());
+    }, [])
+
     const navigate = useNavigate();
 
     const questions = useSelector(state => {

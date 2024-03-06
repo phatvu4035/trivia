@@ -6,6 +6,9 @@ export const answerSlice = createSlice({
         answers: []
     },
     reducers: {
+        clearAllAnswer: (state, action) => {
+            state.answers = [];
+        },
         setSelectedAnswer: (state, action) => {
             let question = action.payload.question;
             let ans = action.payload.ans;
@@ -40,6 +43,6 @@ export const answerSlice = createSlice({
     
 });
 
-export const {setSelectedAnswer, removeSelectedAnswer} = answerSlice.actions;
+export const {clearAllAnswer, setSelectedAnswer, removeSelectedAnswer} = answerSlice.actions;
 
 export default answerSlice.reducer;
