@@ -102,6 +102,12 @@ form {
   color: #fff;
 }
 
+.bg-yellow {
+  border-color: #ffc107;
+  background-color: #ffc107;
+  color: #fff;
+}
+
 .bg-red {
   color: #fff;
   background-color: #dc3545;

@@ -27,6 +27,16 @@ const Result = () => {
         return count;
     }
 
+    const getColorOfScore = () => {
+        if (correctCount < 2) {
+            return 'bg-red';
+        } else if (correctCount < 4) {
+            return 'bg-yellow';
+        } else {
+            return 'bg-green';
+        }
+    }
+
     const [correctCount] = useState(() => {
         return countCorrectAnswer();
     });
@@ -50,7 +60,7 @@ const Result = () => {
                 }
                 {
                     (answers.length > 0) &&
-                    <div className='text-center wd300 mglr-auto'><p className='bg-red'>You scored {correctCount} of {questions.length}</p></div>
+                    <div className='text-center wd300 mglr-auto'><p className={getColorOfScore()}>You scored {correctCount} of {questions.length}</p></div>
                 }
                 
                 <div className="col-100">
