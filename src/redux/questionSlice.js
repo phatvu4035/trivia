@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { shuffleArray } from '../helpers/methodHelpers';
 
 export const questionSlice = createSlice({
     name: 'question',
@@ -7,7 +8,11 @@ export const questionSlice = createSlice({
     },
     reducers: {
         setQuestions: (state, action) => {
-            state.questions = action.payload;
+            let questions = action.payload.map(question => ({
+                ...question,
+                answers: shuffleArray([question.correct_answer, ...question.incorrect_answers])
+            }));
+            state.questions = questions;
         }
     }
 });

@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
-
+import React from "react";
 import {setSelectedAnswer, removeSelectedAnswer} from "../redux/answerSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Question = ({question, displayResult}) => {
 
     const dispatch = useDispatch();
-
-    const [allAnswerOpts, setAllAnswerOpts] = useState(question.incorrect_answers);
-    useEffect(() => {
-        if (typeof question.correct_answer === 'object') {
-            setAllAnswerOpts([...allAnswerOpts, ...question.correct_answer]);
-        } else {
-            setAllAnswerOpts([question.correct_answer, ...allAnswerOpts ]);
-        }
-    }, []);
 
     const handleClickAns = (ans) => {
         let type = question.type;
@@ -61,14 +51,14 @@ const Question = ({question, displayResult}) => {
                 <p className="question-title">{question.question}</p>
                 <div className="ans-block">
                     {
-                        allAnswerOpts.map((ans, ind) => {
+                        question.answers.map((ans, ind) => {
                             
                             return (
-                                <>
+                                <React.Fragment key={ind}>
                                     <button  key={ind} className={getAnsClassName(ans)} onClick={() => {
                                         handleClickAns(ans);
                                     }}>{ans}</button>
-                                </>
+                                </React.Fragment>
                             );
                         })
                     }

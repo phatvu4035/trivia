@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,16 +32,16 @@ const Quiz = () => {
     return (
         <div className="quiz">
             <div className="filter">
-                <Filter key={'filter'}/>
+                <Filter/>
             </div>
 
             <div className="questions-block mglr--15">
                 {
                     questions.map((question, ind) => {
                         return (
-                            <>
+                            <React.Fragment key={ind}>
                                 <Question key={ind} question={question} displayResult={false} questionInd={ind}/>
-                            </>
+                            </React.Fragment>
                         );
                     })
                 }
