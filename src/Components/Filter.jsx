@@ -9,6 +9,8 @@ const Filter = () => {
     const [difficulty, setDifficulty] = useState('');
     const [categories, setCategories] = useState([]);
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const dispatch = useDispatch();
 
     const handleCategoryChange = (e) => {
@@ -27,6 +29,7 @@ const Filter = () => {
     }, []);
 
     const getQuizs = () => {
+        setIsSubmitting(true);
         let url = `https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=multiple`;
         fetch(url).then(resp => resp.json()).then((data) => {
             dispatch(setQuestions(data.results.map(
@@ -35,6 +38,7 @@ const Filter = () => {
                     answers: shuffleArray([question.correct_answer, ...question.incorrect_answers])
                 })))
             );
+            setIsSubmitting(false);
         });
         return false;
     }
@@ -65,7 +69,7 @@ const Filter = () => {
                     <button id="createBtn" onClick={(event) => {
                         getQuizs();
                         event.preventDefault();
-                    }} className="btn btn-outline-dark">Create</button>
+                    }} className="btn btn-outline-dark" disabled={isSubmitting}>Create</button>
                 </div>
             </div>
         </form>
