@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch} from 'react-redux';
 import { setQuestions } from "../redux/questionSlice";
 
+import {shuffleArray} from "../helpers/methodHelpers";
+
 const Filter = () => {
     const [category, setCategory] = useState('');
     const [difficulty, setDifficulty] = useState('');
@@ -27,7 +29,12 @@ const Filter = () => {
     const getQuizs = () => {
         let url = `https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=multiple`;
         fetch(url).then(resp => resp.json()).then((data) => {
-            dispatch(setQuestions(data.results));
+            dispatch(setQuestions(data.results.map(
+                    question => ({
+                    ...question,
+                    answers: shuffleArray([question.correct_answer, ...question.incorrect_answers])
+                })))
+            );
         });
         return false;
     }
