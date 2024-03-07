@@ -30,7 +30,7 @@ const Quiz = () => {
     }
 
     return (
-        <div className="quiz container">
+        <div className="quiz">
             <div className="filter">
                 <Filter key={'filter'}/>
             </div>

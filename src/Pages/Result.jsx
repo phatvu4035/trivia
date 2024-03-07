@@ -32,11 +32,11 @@ const Result = () => {
     });
 
     const gotoQuizPage = () => {
-        navigate('/trivia');
+        navigate('/');
     }
 
     return (
-        <div className="quiz container">
+        <div className="quiz">
 
             <div className="questions-block mglr--15">
                 {
